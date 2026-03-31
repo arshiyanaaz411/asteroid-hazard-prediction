@@ -28,7 +28,7 @@ peri_arg = st.sidebar.slider("Perihelion Arg", 0.0, 360.0, 150.0)
 mean_anom = st.sidebar.slider("Mean Anomaly", 0.0, 360.0, 180.0)
 
 features = np.array([[abs_mag, dia_min, velocity, miss_dist, orbit_unc,
-                      min_orbit, jt_inv, 2458000.5, ecc, semi_major,
+                      min_orbit, jt_inv, ecc, semi_major,
                       incl, asc_node, orb_period, peri_dist, peri_arg, mean_anom]])
 
 if st.button("🔍 Predict!"):
