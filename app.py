@@ -22,6 +22,22 @@ It uses a trained Random Forest model and shows prediction results with probabil
 """)
 
 st.sidebar.header("🔧 Input Features")
+if "abs_mag" not in st.session_state:
+    st.session_state.abs_mag = 20.0
+    st.session_state.dia_min = 0.1
+    st.session_state.velocity = 10.0
+    st.session_state.miss_dist = 0.2
+    st.session_state.orbit_unc = 3
+    st.session_state.min_orbit = 0.05
+    st.session_state.jt_inv = 5.0
+    st.session_state.ecc = 0.3
+    st.session_state.semi_major = 1.5
+    st.session_state.incl = 10.0
+    st.session_state.asc_node = 100.0
+    st.session_state.orb_period = 500.0
+    st.session_state.peri_dist = 0.9
+    st.session_state.peri_arg = 150.0
+    st.session_state.mean_anom = 180.0
 
 abs_mag = st.sidebar.slider("Absolute Magnitude", 10.0, 35.0, 20.0)
 dia_min = st.sidebar.slider("Est Diameter KM (min)", 0.0, 5.0, 0.1)
@@ -49,6 +65,45 @@ tab1, tab2, tab3 = st.tabs(["🔍 Prediction", "📊 Input Summary", "ℹ️ Fea
 
 with tab1:
     st.subheader("Prediction Dashboard")
+    cbtn1, cbtn2 = st.columns(2)
+
+with cbtn1:
+    if st.button("🟢 Load Safe Example"):
+        st.session_state.abs_mag = 28.0
+        st.session_state.dia_min = 0.05
+        st.session_state.velocity = 8.0
+        st.session_state.miss_dist = 0.40
+        st.session_state.orbit_unc = 1
+        st.session_state.min_orbit = 0.20
+        st.session_state.jt_inv = 6.0
+        st.session_state.ecc = 0.20
+        st.session_state.semi_major = 1.2
+        st.session_state.incl = 5.0
+        st.session_state.asc_node = 80.0
+        st.session_state.orb_period = 400.0
+        st.session_state.peri_dist = 1.0
+        st.session_state.peri_arg = 120.0
+        st.session_state.mean_anom = 150.0
+        st.rerun()
+
+with cbtn2:
+    if st.button("🔴 Load Risky Example"):
+        st.session_state.abs_mag = 15.0
+        st.session_state.dia_min = 2.5
+        st.session_state.velocity = 35.0
+        st.session_state.miss_dist = 0.03
+        st.session_state.orbit_unc = 6
+        st.session_state.min_orbit = 0.01
+        st.session_state.jt_inv = 4.0
+        st.session_state.ecc = 0.60
+        st.session_state.semi_major = 2.5
+        st.session_state.incl = 25.0
+        st.session_state.asc_node = 140.0
+        st.session_state.orb_period = 900.0
+        st.session_state.peri_dist = 0.4
+        st.session_state.peri_arg = 210.0
+        st.session_state.mean_anom = 250.0
+        st.rerun()
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Velocity", f"{velocity:.2f} km/s")
